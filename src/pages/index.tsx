@@ -4,19 +4,7 @@ import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
 import { ParsedUrlQuery } from 'querystring';
 import { fetchCompanies } from '@/lib/companies';
-type Company = {
-  id: string;
-  logo: string;
-  name: string;
-  specialties: string[];
-};
-
-type ResponseData = {
-  data: {
-    message: string;
-    companies: Company[];
-  };
-};
+import { ResponseData } from '@/types';
 
 export default function Home({ data }: ResponseData) {
   console.log(data);
@@ -34,7 +22,7 @@ export default function Home({ data }: ResponseData) {
 
       <main className={styles.main}>
         {data.companies.map(({ name, id }) => (
-          <span key={id}>{name}</span>
+          <p key={id}>{name}</p>
         ))}
       </main>
 
