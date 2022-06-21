@@ -21,9 +21,11 @@ export default function Home({ data }: ResponseData) {
       </Head>
 
       <main className={styles.main}>
-        {data.companies.map(({ name, id }) => (
-          <p key={id}>{name}</p>
-        ))}
+        <div className="grid grid-cols-4 gap-4">
+          {data.companies.map(({ name, id }) => (
+            <div key={id}>{name}</div>
+          ))}
+        </div>
       </main>
 
       <footer className={styles.footer}>
