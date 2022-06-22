@@ -1,5 +1,8 @@
 
-## Features
+<img width="1692" alt="image" src="https://user-images.githubusercontent.com/800425/175057916-4d10254e-9922-4ed9-a587-d7f8dcba6649.png">
+
+
+ Features
 
 - Search for a company by typing into a search field. The search term gets matched only
 against the company name and the list of companies is filtered based on the search term
@@ -22,12 +25,6 @@ Open `http://localhost:3000` with your browser to see the result.
 ## Documentation
 
 
-### Directory Structure
-
-- [`.github`](.github) — GitHub configuration including the CI workflow.<br>
-- [`.husky`](.husky) — Husky configuration and hooks.<br>
-- [`public`](./public) — Static assets such as robots.txt, images, and favicon.<br>
-- [`src`](./src) — Application source code, including pages, components, styles.
 
 ### Scripts
 
@@ -42,3 +39,6 @@ Open `http://localhost:3000` with your browser to see the result.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
+
+<img width="1417" alt="image" src="https://user-images.githubusercontent.com/800425/175058213-f4ee6315-718a-4114-91ac-a6d1ab0ecadb.png">
+
