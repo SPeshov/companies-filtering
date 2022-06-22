@@ -1,6 +1,8 @@
 import { server } from '@/config';
+import { getData } from '@/data';
+import { Company, Filters, ResponseData } from '@/types';
 
-export const fetchCompanies = async ({ filters }: { filters: string[] }) => {
+export const fetchCompanies = async ({ filters }: { filters: Filters }) => {
   try {
     const response = await fetch(`${server}/api/companies`, {
       method: `POST`,
@@ -15,8 +17,38 @@ export const fetchCompanies = async ({ filters }: { filters: string[] }) => {
     }
 
     const companies = await response.json();
-    return companies;
+    return companies as ResponseData['data'];
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getAvailableSpecialties = async () => {
+  const companies = await getData();
+
+  const specialties = new Set<string>();
+
+  const allSpecialties = companies.flatMap((company) => company.specialties);
+
+  allSpecialties.forEach((spec) => {
+    specialties.add(spec);
+  });
+
+  return [...specialties];
+};
+
+export const filterCompanies = ({
+  filters,
+  companies,
+}: {
+  filters: Filters;
+  companies: Company[];
+}) => {
+  const { name } = filters;
+
+  const filterByName = companies.filter(({ name: companyName }) =>
+    name ? companyName.toLowerCase().includes(name.toLowerCase()) : true,
+  );
+
+  return filterByName;
 };

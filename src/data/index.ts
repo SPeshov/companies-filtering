@@ -10,12 +10,15 @@ export const getData = async () => {
     logo: string;
     name: string;
     specialties: string;
+    city: string;
   }[] = JSON.parse(jsonData.toString());
 
   // split specialties in array
   const response = objectData.map((data) => ({
     ...data,
-    specialties: data.specialties.split(` & `),
+    specialties: data.specialties.includes(` & `)
+      ? data.specialties.split(` & `)
+      : data.specialties.split(` and `),
   }));
 
   return response;
