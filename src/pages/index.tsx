@@ -14,19 +14,23 @@ export default function Home({ data }: ResponseData) {
   );
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>TypeScript starter for Next.js</title>
-        <meta
-          name="description"
-          content="TypeScript starter for Next.js that includes all you need to build amazing apps"
-        />
+        <title>Filtering companies</title>
+        <meta name="description" content="Companies filtering" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className="container mx-auto">
-        <Filters setSearchResults={setCompanies} serverData={data.companies} />
+        <div className="mt-5 mb-5">
+          <Filters
+            setSearchResults={setCompanies}
+            serverData={data.companies}
+            specialties={data.specialties}
+          />
+        </div>
+
         <div className="grid grid-cols-4 gap-4">
           {companies.map(({ name, id, specialties, logo, city }) => (
             <div
@@ -87,15 +91,16 @@ export default function Home({ data }: ResponseData) {
           ))}
         </div>
       </div>
-      <footer className={styles.footer}>footer</footer>
+      <footer className={styles.footer}>made by ❤️</footer>
     </div>
   );
 }
 
 export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   const name = query.name as string;
+  const specialties = query.specialties as string[];
 
-  const data = await fetchCompanies({ filters: { name } });
+  const data = await fetchCompanies({ filters: { name, specialties } });
 
   return { props: { data } };
 }

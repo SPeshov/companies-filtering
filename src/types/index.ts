@@ -16,4 +16,5 @@ export type ResponseData = {
 
 export type Filters = {
   name?: string;
+  specialties?: string[];
 };

@@ -44,11 +44,29 @@ export const filterCompanies = ({
   filters: Filters;
   companies: Company[];
 }) => {
-  const { name } = filters;
+  const { name, specialties } = filters;
 
-  const filterByName = companies.filter(({ name: companyName }) =>
-    name ? companyName.toLowerCase().includes(name.toLowerCase()) : true,
-  );
+  let filtered = [...companies];
 
-  return filterByName;
+  filtered = name
+    ? filtered.filter(({ name: companyName }) =>
+        companyName.toLowerCase().includes(name.toLowerCase()),
+      )
+    : filtered;
+
+  filtered =
+    specialties && specialties.length > 0
+      ? filtered.filter(({ specialties: companySpecialties }) => {
+          const intersections = companySpecialties.filter(
+            (e) => specialties.indexOf(e) !== -1,
+          );
+
+          if (intersections.length > 0) {
+            return true;
+          }
+          return false;
+        })
+      : filtered;
+
+  return [...filtered];
 };
